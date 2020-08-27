@@ -1,0 +1,23 @@
+.Home {
+  display: flex;
+  font-size: calc(10px + 2vmin);
+}
+
+.Jumbotron {
+  color: black;
+  padding-left: 75px;
+}
+
+.KanbannerTitle {
+  padding-top: 40px;
+  padding-bottom: 0px;
+  border: 0px;
+  font-size: 100px;
+}
+
+.Jumbotron p {
+  margin-top: -70px;
+  padding-top: 0px;
+  padding-left: 25px;
+  font-size: 40px;
+}
