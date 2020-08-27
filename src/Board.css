@@ -1,18 +1,23 @@
-.KanbannerBoard:after {   
+.KanbannerBoard:after {
     display: table;
     font-size: calc(10px + 2vmin);
     column-count: 3;
 }
 
-.column:first-of-type {
-    margin-left: 5%;
+.Column:first-of-type {
+    margin-left: 12.5%;
 }
 
-.column {
+.Column {
     float: left;
-    width: 30%;
-    border-style: dotted;
+    width: 25%;
     text-align: center;
+    height: 100vh;
 }
 
-  
+.Task {
+    margin: 10px 25px 10px 25px;
+    background: #f7e9e7;
+    border: solid black 3px;
+    border-radius: 20px;
+}
