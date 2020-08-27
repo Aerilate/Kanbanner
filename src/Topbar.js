@@ -15,7 +15,7 @@ class Topbar extends Component {
     toggleSidebar() {
         this.props.onToggledSidebar();
     }
-
+    
     createTask() {
         this.props.onCreateTask();
     }

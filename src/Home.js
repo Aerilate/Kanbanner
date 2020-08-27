@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Topbar from './Topbar';
-import Sidebar from './Sidebar';
+import LoginSidebar from './LoginSidebar';
 import './Home.css';
 
 
@@ -20,7 +20,7 @@ class Home extends Component {
     render() {
         return (
             <div className="Home">
-                <Sidebar sidebarOpen={this.state.sidebarOpen}
+                <LoginSidebar sidebarOpen={this.state.sidebarOpen}
                     onToggledSidebar={this.handleSidebarChange} />
                 <Topbar page="Home"
                     onToggledSidebar={this.handleSidebarChange} />

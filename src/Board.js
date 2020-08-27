@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CreateTaskSidebar from './CreateTaskSidebar';
 import Topbar from './Topbar';
 import './Board.css';
 
@@ -7,18 +8,51 @@ class Board extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            sidebarOpen: false,
             tasks: [
                 { name: "Learn Angular", description: "yes", category: "toDo" },
                 { name: "Learn Angular2", description: "yes", category: "doing" },
                 { name: "Learn Angular3", description: "yes", category: "done" }
-            ]
+            ],
+            newTaskName: "",
+            newTaskDescription: ""
         }
-        this.handleCreateTask = this.handleCreateTask.bind(this);
+        this.handleSidebarChange = this.handleSidebarChange.bind(this);
+        this.handleNewTaskNameChange = this.handleNewTaskNameChange.bind(this);
+        this.handleNewTaskDescriptionChange = this.handleNewTaskDescriptionChange.bind(this);
+        this.handleSubmitTask = this.handleSubmitTask.bind(this);
         this.handleClearBoard = this.handleClearBoard.bind(this);
     }
 
-    handleCreateTask() {
-        this.setState({ tasks: this.state.tasks.concat({ name: "Learn Vue", description: "yes", category: "toDo" }) });
+    handleSidebarChange() {
+        this.setState({ sidebarOpen: !this.state.sidebarOpen });
+    }
+
+    handleNewTaskNameChange(name) {
+        this.setState({ newTaskName: name });
+    }
+
+    handleNewTaskDescriptionChange(description) {
+        this.setState({ newTaskDescription: description });
+    }
+
+    handleSubmitTask() {
+        if (this.state.newTaskName) {
+            this.setState({
+                tasks: this.state.tasks.concat({
+                    name: this.state.newTaskName,
+                    description: this.state.newTaskDescription,
+                    category: "toDo"
+                })
+            });
+            this.setState({
+                newTaskName: ""
+            });
+            this.setState({
+                newTaskDescription: ""
+            });
+            this.handleSidebarChange();
+        }
     }
 
     handleClearBoard() {
@@ -33,7 +67,7 @@ class Board extends Component {
         console.log(cat);
         let id = ev.dataTransfer.getData("id");
         let tasks = this.state.tasks.filter((task) => {
-            if (task.name === id) {
+            if (task.name + task.description === id) {
                 task.category = cat;
             }
             return task;
@@ -49,7 +83,7 @@ class Board extends Component {
     formatTasks(arr) {
         this.state.tasks.forEach((t) => {
             arr[t.category].push(
-                <div className="Task" onDragStart={(e) => this.onDragStart(e, t.name)} draggable="true">
+                <div className="Task" onDragStart={(e) => this.onDragStart(e, t.name + t.description)} draggable="true">
                     <h3>{t.name}</h3>
                     <p>{t.description}</p>
                 </div>)
@@ -66,7 +100,16 @@ class Board extends Component {
 
         return (
             <div className="Board" >
-                <Topbar page="Board" onCreateTask={this.handleCreateTask} onClearBoard={this.handleClearBoard} />
+                <CreateTaskSidebar
+                    newTaskName={this.state.newTaskName}
+                    newTaskDescription={this.state.newTaskDescription}
+                    onNewTaskNameChange={this.handleNewTaskNameChange}
+                    onNewTaskDescriptionChange={this.handleNewTaskDescriptionChange}
+                    onSubmitTask={this.handleSubmitTask}
+                    sidebarOpen={this.state.sidebarOpen}
+                    onToggledSidebar={this.handleSidebarChange} />
+
+                <Topbar page="Board" onCreateTask={this.handleSidebarChange} onClearBoard={this.handleClearBoard} />
 
                 <div className="KanbannerBoard">
                     <div className="Column" onDragOver={(e) => this.onDragOver(e)} onDrop={(e) => this.onDrop(e, "toDo")}>

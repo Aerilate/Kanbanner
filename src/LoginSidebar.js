@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactSidebar from "react-sidebar";
 import fire from './config/fire';
-import './Sidebar.css';
+import './LoginSidebar.css';
 
-class Sidebar extends Component {
+class LoginSidebar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -59,19 +59,18 @@ class Sidebar extends Component {
                                 placeholder="email"
                                 onChange={this.handleChange}
                                 value={this.state.email}
-
                             />
                             <input
-                                name="password"
                                 type="password"
                                 id="password"
+                                name="password"
                                 placeholder="password"
                                 onChange={this.handleChange}
                                 value={this.state.password}
                             />
                             <div className="SignupLoginButtons">
-                                <h2 className="SignupButton" onClick={this.signup}>Signup</h2>
-                                <h2 className="LoginButton" onClick={this.login}>Login</h2>
+                                <h2 className="SignupButton" onClick={this.signup}>signup</h2>
+                                <h2 className="LoginButton" onClick={this.login}>login</h2>
                             </div>
                         </form>
                     </div>}
@@ -90,4 +89,4 @@ class Sidebar extends Component {
 }
 
 
-export default Sidebar;
+export default LoginSidebar;
