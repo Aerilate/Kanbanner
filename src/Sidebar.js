@@ -13,13 +13,13 @@ class Sidebar extends Component {
         this.signup = this.signup.bind(this);
         this.login = this.login.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.openLoginSidebar = this.openLoginSidebar.bind(this);
+        this.toggleSidebar = this.toggleSidebar.bind(this);
     }
 
     signup(e) {
         e.preventDefault();
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-            console.log(u)
+            console.log(u);
         }).catch((err) => {
             console.log(err);
         })
@@ -28,7 +28,7 @@ class Sidebar extends Component {
     login(e) {
         e.preventDefault();
         fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-            console.log(u)
+            console.log(u);
         }).catch((err) => {
             console.log(err);
         })
@@ -40,8 +40,8 @@ class Sidebar extends Component {
         })
     }
 
-    openLoginSidebar() {
-        this.props.onOpenSidebar();
+    toggleSidebar() {
+        this.props.onToggledSidebar();
     }
 
     render() {
@@ -49,7 +49,7 @@ class Sidebar extends Component {
             <ReactSidebar
                 sidebar={
                     <div className="Sidebar">
-                        <h3 className="CloseButton" onClick={this.openLoginSidebar}>close (x)</h3>
+                        <h3 className="CloseButton" onClick={this.toggleSidebar}>close (x)</h3>
                         <h1 className="SidebarTitle">Signup / Login</h1>
                         <form>
                             <input
@@ -81,7 +81,7 @@ class Sidebar extends Component {
                     sidebar:
                     {
                         background: "#333333",
-                        color: "white",
+                        color: "white"
                     }
                 }}>
             </ReactSidebar >

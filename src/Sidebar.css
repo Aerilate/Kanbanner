@@ -26,10 +26,15 @@ input {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 
     sans-serif;
     font-size: calc(10px + 2vmin);
+    padding: 6px;
     width: 80%;
     border: none;
-    border-radius: 2px;
+    border-radius: 10px;
     margin-bottom: 4vh;
+}
+
+input:focus {
+    outline: thin dotted; 
 }
 
 .SignupLoginButtons>*:hover {

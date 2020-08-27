@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import fire from './config/fire';
 import './Topbar.css';
-import { Link } from 'react-router-dom';
 
 
 class Topbar extends Component {
     constructor(props) {
         super(props);
-        this.openLoginSidebar = this.openLoginSidebar.bind(this);
+        this.toggleSidebar = this.toggleSidebar.bind(this);
         this.createTask = this.createTask.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
     }
 
-    openLoginSidebar() {
-        this.props.onOpenSidebar();
+    toggleSidebar() {
+        this.props.onToggledSidebar();
     }
 
     createTask() {
@@ -21,7 +20,6 @@ class Topbar extends Component {
 
     handleLogout() {
         fire.auth().signOut();
-        this.props.onOpenSidebar();
     }
 
     render() {
@@ -32,7 +30,7 @@ class Topbar extends Component {
                         <li class="Title"><h2>kanbanner</h2></li>
 
                         {this.props.page === "Home" &&
-                            <li class="Login" onClick={this.openLoginSidebar}><h2>signup / login</h2></li>}
+                            <li class="Login" onClick={this.toggleSidebar}><h2>signup / login</h2></li>}
 
                         {this.props.page === "Board" &&
                             <div>
