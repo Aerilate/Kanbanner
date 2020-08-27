@@ -3,8 +3,8 @@
 }
 
 .CloseButton {
-    margin-left: 2vw;
-    text-align: left;
+    margin-right: 2vw;
+    text-align: right;
 }
 
 .CloseButton:hover {

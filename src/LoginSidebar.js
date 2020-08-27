@@ -3,6 +3,7 @@ import ReactSidebar from "react-sidebar";
 import fire from './config/fire';
 import './LoginSidebar.css';
 
+
 class LoginSidebar extends Component {
     constructor(props) {
         super(props);
@@ -83,6 +84,7 @@ class LoginSidebar extends Component {
                         color: "white"
                     }
                 }}>
+                <div />
             </ReactSidebar >
         );
     }

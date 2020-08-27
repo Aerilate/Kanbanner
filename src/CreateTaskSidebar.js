@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactSidebar from "react-sidebar";
 import './CreateTaskSidebar.css';
 
+
 class CreateTaskSidebar extends Component {
     constructor(props) {
         super(props);
@@ -12,7 +13,7 @@ class CreateTaskSidebar extends Component {
     }
 
     handleNameChange(e) {
-       this.props.onNewTaskNameChange(e.target.value);
+        this.props.onNewTaskNameChange(e.target.value);
     }
 
     handleDescriptionChange(e) {
@@ -48,7 +49,7 @@ class CreateTaskSidebar extends Component {
                             <input
                                 type="text"
                                 name="taskDescription"
-                                placeholder="description" 
+                                placeholder="description"
                                 value={taskDescription}
                                 onChange={this.handleDescriptionChange}
                             />
@@ -64,6 +65,7 @@ class CreateTaskSidebar extends Component {
                         color: "white"
                     }
                 }}>
+                <div />
             </ReactSidebar >
         );
     }

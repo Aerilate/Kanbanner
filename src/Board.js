@@ -83,7 +83,10 @@ class Board extends Component {
     formatTasks(arr) {
         this.state.tasks.forEach((t) => {
             arr[t.category].push(
-                <div className="Task" onDragStart={(e) => this.onDragStart(e, t.name + t.description)} draggable="true">
+                <div className="Task"
+                    key={t.name + t.description}
+                    onDragStart={(e) => this.onDragStart(e, t.name + t.description)}
+                    draggable="true">
                     <h3>{t.name}</h3>
                     <p>{t.description}</p>
                 </div>)
