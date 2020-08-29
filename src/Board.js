@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
+import fire from './config/fire';
 import CreateTaskSidebar from './CreateTaskSidebar';
 import Topbar from './Topbar';
 import './Board.css';
+const database = fire.database();
 
 
 class Board extends Component {
+    _isMounted = false;
+
     constructor(props) {
         super(props);
         this.state = {
             sidebarOpen: false,
-            tasks: [
-                { name: "Learn Angular", description: "yes", category: "toDo" },
-                { name: "Learn Angular2", description: "yes", category: "doing" },
-                { name: "Learn Angular3", description: "yes", category: "done" }
-            ],
+            tasks: [],
             newTaskName: "",
             newTaskDescription: ""
         }
@@ -22,6 +22,33 @@ class Board extends Component {
         this.handleNewTaskDescriptionChange = this.handleNewTaskDescriptionChange.bind(this);
         this.handleSubmitTask = this.handleSubmitTask.bind(this);
         this.handleClearBoard = this.handleClearBoard.bind(this);
+    }
+
+    async componentDidMount() {
+        this._isMounted = true;
+
+        if (this.props.userId) {
+            let dbTasks = await database.ref('/users/' + this.props.userId).once('value')
+                .then((snapshot) => {
+                    return (snapshot.val() && snapshot.val().tasks) || [];
+                })
+
+            if (this._isMounted) {
+                this.setState({
+                    tasks: dbTasks
+                });
+            }
+        }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
+    writeUserTasksToDB() {
+        database.ref('/users/' + this.props.userId).set({
+            tasks: this.state.tasks
+        });
     }
 
     handleSidebarChange() {
@@ -43,20 +70,21 @@ class Board extends Component {
                     name: this.state.newTaskName,
                     description: this.state.newTaskDescription,
                     category: "toDo"
-                })
-            });
-            this.setState({
-                newTaskName: ""
-            });
-            this.setState({
+                }),
+                newTaskName: "",
                 newTaskDescription: ""
-            });
+            }, this.writeUserTasksToDB);
             this.handleSidebarChange();
         }
     }
 
     handleClearBoard() {
-        this.setState({ tasks: [] });
+        this.setState({ tasks: [] }, this.writeUserTasksToDB);
+    }
+
+    onDragStart = (ev, id) => {
+        console.log("dragstart:", id);
+        ev.dataTransfer.setData("id", id);
     }
 
     onDragOver = (ev) => {
@@ -66,26 +94,21 @@ class Board extends Component {
     onDrop = (ev, cat) => {
         console.log(cat);
         let id = ev.dataTransfer.getData("id");
-        let tasks = this.state.tasks.filter((task) => {
-            if (task.name + task.description === id) {
-                task.category = cat;
+        let tasks = this.state.tasks.filter((t) => {
+            if (t.name + "\n" + t.description === id) {
+                t.category = cat;
             }
-            return task;
+            return t;
         });
-        this.setState({ ...this.state, tasks });
-    }
-
-    onDragStart = (ev, id) => {
-        console.log("dragstart:", id);
-        ev.dataTransfer.setData("id", id);
+        this.setState({ ...this.state, tasks }, this.writeUserTasksToDB);
     }
 
     formatTasks(arr) {
         this.state.tasks.forEach((t) => {
             arr[t.category].push(
                 <div className="Task"
-                    key={t.name + t.description}
-                    onDragStart={(e) => this.onDragStart(e, t.name + t.description)}
+                    key={t.name + "\n" + t.description}
+                    onDragStart={(e) => this.onDragStart(e, t.name + "\n" + t.description)}
                     draggable="true">
                     <h3>{t.name}</h3>
                     <p>{t.description}</p>

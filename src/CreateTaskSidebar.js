@@ -39,7 +39,7 @@ class CreateTaskSidebar extends Component {
                         <h3 className="CloseButton" onClick={this.toggleSidebar}>close (x)</h3>
                         <h1 className="SidebarTitle">CreateTask</h1>
                         <form>
-                            <input
+                            <input id="taskName"
                                 type="text"
                                 name="taskName"
                                 placeholder="task name (required)"

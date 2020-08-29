@@ -33,7 +33,7 @@ class App extends Component {
       <Router>
         <Route exact path={"/"} component={() =>
           <div className="Page">
-            {this.state.user ? <Board /> : <Home />}
+            {this.state.user ? <Board userId={this.state.user.uid} /> : <Home />}
           </div>} />
       </Router >
     );

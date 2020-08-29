@@ -26,10 +26,10 @@ input {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 
     sans-serif;
     font-size: calc(10px + 2vmin);
-    padding: 6px;
+    padding: 6px 14px 6px 14px;
     width: 80%;
     border: none;
-    border-radius: 10px;
+    border-radius: 80px;
     margin-bottom: 4vh;
 }
 
