@@ -1,3 +1,5 @@
+# This file is for testing purposes. Deployments should be preferred over plain ReplicaSets.
+
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:

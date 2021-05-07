@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kanbanner
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kanbanner
+  template:
+    metadata:
+      name: kanbanner
+      labels:
+        app: kanbanner
+    spec:
+      containers:
+      - name: kanbanner
+        image: raymwang/kanbanner
+        stdin: true
+        tty: true
