@@ -3,7 +3,7 @@ version: '3.7'
 
 services:
     kanbanner:
-        image: kanbanner:latest
+        image: raymwang/kanbanner:latest
         container_name: kanbanner
         stdin_open: true
         tty: true
