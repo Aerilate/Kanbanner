@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: kanbanner-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kanbanner
+  template:
+    metadata:
+       labels:
+         app: kanbanner
+    spec:
+       containers:
+       - name: kanbanner
+         image: raymwang/kanbanner
+         stdin: true
+         tty: true
+         
