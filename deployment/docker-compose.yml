@@ -1,0 +1,14 @@
+---
+version: '3.7'
+
+services:
+    kanbanner:
+        image: kanbanner:latest
+        container_name: kanbanner
+        stdin_open: true
+        tty: true
+        ports:
+            - '3000:3000'
+        build:
+            context: ../
+            dockerfile: ./deployment/Dockerfile

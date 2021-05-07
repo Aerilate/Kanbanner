@@ -1,0 +1,8 @@
+.firebase/
+
+build/
+deployment/
+node_modules/
+
+.gitignore
+README.md
