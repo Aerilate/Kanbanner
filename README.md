@@ -1,4 +1,4 @@
-# Kanbanner
+# :pencil2: Kanbanner :pencil2:
 This project is a Kanban board built with React. The app was designed to be simple enough so I could try out different methods of deployment, from Firebase to Kubernetes. Check out the [production deployment](https://kanbanner-cbf56.web.app/), achieved through Firebase. Test credentials can be found in the demo section below.
 
 ![alt text](./public/screenshots/home.png "Home page")\
